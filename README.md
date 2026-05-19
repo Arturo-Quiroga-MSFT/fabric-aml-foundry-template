@@ -21,14 +21,13 @@ Connectivity walk-through with screenshots checklist: [docs/05-onelake-access-ru
 
 ## Quick start
 
-1. Read [docs/01-engagement-context.md](docs/01-engagement-context.md).
-2. Review [docs/02-architecture.md](docs/02-architecture.md).
-3. Provision the test bed using [infra/README.md](infra/README.md).
-4. Verify Fabric access: [notebooks/00-fabric-onelake-connectivity.ipynb](notebooks/00-fabric-onelake-connectivity.ipynb).
-5. Register Fabric OneLake as an AML datastore: [notebooks/00b-register-onelake-datastore.ipynb](notebooks/00b-register-onelake-datastore.ipynb).
-6. Copy data into AML as a versioned MLTable: [notebooks/01a-copy-fabric-to-aml.ipynb](notebooks/01a-copy-fabric-to-aml.ipynb).
-7. Train: [notebooks/02-sklearn-training.ipynb](notebooks/02-sklearn-training.ipynb).
-8. Deploy: [notebooks/03-deploy-online-endpoint.ipynb](notebooks/03-deploy-online-endpoint.ipynb).
-9. Monitor: [notebooks/04-monitoring-setup.ipynb](notebooks/04-monitoring-setup.ipynb).
+1. Review [docs/02-architecture.md](docs/02-architecture.md).
+2. Provision the test bed using [infra/README.md](infra/README.md).
+3. Verify Fabric access: [notebooks/00-fabric-onelake-connectivity.ipynb](notebooks/00-fabric-onelake-connectivity.ipynb).
+4. Register Fabric OneLake as an AML datastore: [notebooks/00b-register-onelake-datastore.ipynb](notebooks/00b-register-onelake-datastore.ipynb).
+5. Copy data into AML as a versioned MLTable: [notebooks/01a-copy-fabric-to-aml.ipynb](notebooks/01a-copy-fabric-to-aml.ipynb).
+6. Train: [notebooks/02-sklearn-training.ipynb](notebooks/02-sklearn-training.ipynb).
+7. Deploy: [notebooks/03-deploy-online-endpoint.ipynb](notebooks/03-deploy-online-endpoint.ipynb).
+8. Monitor: [notebooks/04-monitoring-setup.ipynb](notebooks/04-monitoring-setup.ipynb).
 
 Full connectivity walk-through (with screenshots checklist): [docs/05-onelake-access-runbook.md](docs/05-onelake-access-runbook.md).
