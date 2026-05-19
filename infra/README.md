@@ -1,6 +1,6 @@
 # Infrastructure (Bicep)
 
-Provisions the POC test bed described in [../docs/03-test-bed-resources.md](../docs/03-test-bed-resources.md).
+Provisions the POC test bed. See [../docs/02-architecture.md](../docs/02-architecture.md) for the architecture and component overview.
 
 ## What it deploys
 
