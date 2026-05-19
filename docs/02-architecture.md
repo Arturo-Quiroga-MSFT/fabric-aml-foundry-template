@@ -1,6 +1,6 @@
 # POC Architecture
 
-> Reflects decisions from the 6 May 2026 sync — see [04-meeting-decisions-2026-05-06.md](04-meeting-decisions-2026-05-06.md). Training uses **scikit-learn in a notebook** (no AutoML); data is **copied** from Fabric into AML so it can be tracked and versioned.
+Training uses **scikit-learn in a notebook** (no AutoML); data is **copied** from Fabric into AML so it can be tracked and versioned.
 
 ## 1. High-level diagram
 
