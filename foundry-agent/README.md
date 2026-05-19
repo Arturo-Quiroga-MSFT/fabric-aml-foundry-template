@@ -1,7 +1,5 @@
 # Foundry agent
 
-Owner: **<author> Bittencourt**.
-
 This folder will host the **Microsoft Foundry agent** that uses the AML
 managed online endpoints as tools, plus the supporting MCP server.
 

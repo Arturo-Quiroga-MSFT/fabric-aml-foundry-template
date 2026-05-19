@@ -1,6 +1,6 @@
 # Runbook — Connect Microsoft Fabric (OneLake) to Azure ML
 
-> Owner: **<author>**. Goal: prove the end-to-end Fabric ⇄ Azure ML connectivity story so Contoso engineers can reproduce it. Pair this runbook with screenshots from each step as you execute.
+> Goal: prove the end-to-end Fabric ⇄ Azure ML connectivity story so it can be reproduced. Pair this runbook with screenshots from each step as you execute.
 
 ## 0. Prerequisites
 
@@ -44,7 +44,7 @@ Capture from the deployment outputs:
 1. Open https://app.fabric.microsoft.com.
 2. **Workspaces → New workspace** → name it (e.g., `contoso-poc-ws`) and assign a **capacity** (F2 or Trial).
 3. Inside the workspace: **+ New → Lakehouse** → name it (e.g., `contoso_poc_lh`).
-4. Under the Lakehouse → **Get data → Upload files** (or **Load to tables**) and load a sample dataset (<author> will pick the file). Confirm a Delta table appears under **Tables**.
+4. Under the Lakehouse → **Get data → Upload files** (or **Load to tables**) and load a sample dataset. Confirm a Delta table appears under **Tables**.
 
 > **Screenshot:** Lakehouse view with at least one Delta table under `Tables/`.
 

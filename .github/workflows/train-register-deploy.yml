@@ -1,9 +1,8 @@
 name: train-register-deploy
 
-# Owner: <author> B. — flesh out as the model + endpoint stabilize.
-# This is a starter scaffold: it shows the shape of the pipeline but the real
-# job invocations (az ml job create / az ml online-deployment update) need to
-# be wired up once the data asset name, model name, and endpoint name are final.
+# Starter scaffold: it shows the shape of the pipeline but the real job
+# invocations (az ml job create / az ml online-deployment update) need to be
+# wired up once the data asset name, model name, and endpoint name are final.
 
 on:
   workflow_dispatch:

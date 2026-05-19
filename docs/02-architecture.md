@@ -80,8 +80,8 @@ flowchart LR
 | Compute instance | Interactive dev / notebooks | `Standard_DS3_v2` |
 | Compute cluster | Training jobs (autoscale 0→N) | `Standard_DS3_v2` to start |
 | Managed online endpoint | Real-time scoring; called by Foundry agent | `Standard_DS2_v2` × 1 |
-| Foundry agent | Demonstrates AML endpoint used as a tool by an agent | Owner: <author> |
-| GitHub repo + Actions | CICD: train, register, deploy on commit / dispatch | Owner: <author> |
+| Foundry agent | Demonstrates AML endpoint used as a tool by an agent | — |
+| GitHub repo + Actions | CICD: train, register, deploy on commit / dispatch | — |
 | Model monitoring | Drift, data quality, prediction drift | Scheduled job, writes to LAW |
 | Application Insights | Endpoint telemetry (latency, failures, custom events) | Linked to LAW |
 | Log Analytics | Backing store for AI + AML diagnostics | Pay-as-you-go |

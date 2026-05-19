@@ -1,8 +1,6 @@
-# Deployment Journey & Roadblock Log — May 6, 2026
+# Deployment Journey & Roadblock Log
 
-> Purpose: capture every issue hit while standing up the Contoso POC test bed and the exact fix applied, so Contoso engineers (and our future selves) can reproduce the environment without re-discovering the same lessons.
-
-Author: <author> (PSA). Session date: 2026-05-06.
+> Purpose: capture every issue hit while standing up the POC test bed and the exact fix applied, so the environment can be reproduced without re-discovering the same lessons.
 
 ## 1. Final state achieved
 
