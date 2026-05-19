@@ -1,0 +1,14 @@
+[project]
+name = "aml-mcp-server"
+version = "0.1.0"
+description = "MCP Server for ML Models"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "azure-monitor-opentelemetry>=1.6.9",
+    "fastmcp>=3.2.4",
+    "holidays>=0.70",
+    "httpx>=0.28.1",
+    "azure-monitor-opentelemetry>=1.6.0",
+    "opentelemetry-instrumentation-httpx>=0.48b0",
+]

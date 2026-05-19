@@ -1,0 +1,105 @@
+name: mcp-server-containerapps-deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'foundry-agent/aml-mcp-server/**'
+      - '.github/workflows/mcp-server-containerapps-deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  IMAGE_NAME: aml-mcp-server
+  MCP_SERVER_DIR: foundry-agent/aml-mcp-server
+  AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+  AZURE_CONTAINER_APP_NAME: ${{ vars.AZURE_CONTAINER_APP_NAME }}
+  AZURE_CONTAINER_NAME: ${{ vars.AZURE_CONTAINER_NAME }}
+  ACR_NAME: ${{ vars.ACR_NAME }}
+  ACR_LOGIN_SERVER: ${{ vars.ACR_LOGIN_SERVER }}
+  AML_ENDPOINT_URL: ${{ vars.AML_ENDPOINT_URL }}
+
+jobs:
+  build-push-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Resolve ACR login server
+        shell: bash
+        run: |
+          if [ -z "${ACR_LOGIN_SERVER}" ]; then
+            if [ -z "${ACR_NAME}" ]; then
+              echo "Set either repo variable ACR_LOGIN_SERVER (e.g. myacr.azurecr.io) or ACR_NAME (e.g. myacr)." >&2
+              exit 1
+            fi
+            ACR_LOGIN_SERVER=$(az acr show -n "${ACR_NAME}" --query loginServer -o tsv)
+            echo "ACR_LOGIN_SERVER=${ACR_LOGIN_SERVER}" >> "$GITHUB_ENV"
+          elif [ -z "${ACR_NAME}" ]; then
+            ACR_NAME="${ACR_LOGIN_SERVER%%.*}"
+            echo "ACR_NAME=${ACR_NAME}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Build and push image to ACR
+        shell: bash
+        run: |
+          az acr login --name "${ACR_NAME}"
+
+          IMAGE_TAG="${GITHUB_SHA::12}"
+          IMAGE_URI="${ACR_LOGIN_SERVER}/${IMAGE_NAME}:${IMAGE_TAG}"
+
+          docker build \
+            -f "${MCP_SERVER_DIR}/Dockerfile" \
+            -t "${IMAGE_URI}" \
+            "${MCP_SERVER_DIR}"
+
+          docker push "${IMAGE_URI}"
+
+          echo "IMAGE_URI=${IMAGE_URI}" >> "$GITHUB_ENV"
+          echo "Pushed ${IMAGE_URI}"
+
+      - name: Update Azure Container App to new image
+        shell: bash
+        run: |
+          if [ -z "${AZURE_RESOURCE_GROUP}" ] || [ -z "${AZURE_CONTAINER_APP_NAME}" ]; then
+            echo "Set repo variables AZURE_RESOURCE_GROUP and AZURE_CONTAINER_APP_NAME." >&2
+            exit 1
+          fi
+
+          if [ -n "${AZURE_CONTAINER_NAME}" ]; then
+            az containerapp update \
+              --resource-group "${AZURE_RESOURCE_GROUP}" \
+              --name "${AZURE_CONTAINER_APP_NAME}" \
+              --container-name "${AZURE_CONTAINER_NAME}" \
+              --image "${IMAGE_URI}" \
+              --set-env-vars "AML_ENDPOINT_URL=$AML_ENDPOINT_URL"
+          else
+            az containerapp update \
+              --resource-group "${AZURE_RESOURCE_GROUP}" \
+              --name "${AZURE_CONTAINER_APP_NAME}" \
+              --image "${IMAGE_URI}" \
+              --set-env-vars "AML_ENDPOINT_URL=$AML_ENDPOINT_URL"
+          fi
+
+      - name: Deployment summary
+        shell: bash
+        run: |
+          {
+            echo "## MCP Server deployment"
+            echo "- Container App: ${AZURE_CONTAINER_APP_NAME}"
+            echo "- Resource group: ${AZURE_RESOURCE_GROUP}"
+            echo "- Image: ${IMAGE_URI}"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,79 @@
+{
+  "input_data": {
+    "columns": [
+      "tenant_seat_count",
+      "customer_tier",
+      "product_area",
+      "issue_category",
+      "channel",
+      "region",
+      "language",
+      "priority_reported",
+      "attached_logs",
+      "prior_tickets_30d",
+      "agent_tier",
+      "created_at_year",
+      "created_at_month",
+      "created_at_day",
+      "created_at_dayofweek"
+    ],
+    "index": [
+      0,
+      1,
+      2
+    ],
+    "data": [
+      [
+        610,
+        "Standard",
+        "Contoso Cloud Backup",
+        "Auth",
+        "Portal",
+        "EMEA",
+        "pt",
+        "High",
+        false,
+        0.0,
+        "T1",
+        2026,
+        3,
+        5,
+        3
+      ],
+      [
+        610,
+        "Premium",
+        "Purview",
+        "Permissions",
+        "Teams",
+        "EMEA",
+        "en",
+        "Low",
+        false,
+        1.0,
+        "T3",
+        2025,
+        6,
+        11,
+        2
+      ],
+      [
+        31,
+        "Standard",
+        "SharePoint",
+        "Sync",
+        "Email",
+        "LATAM",
+        "de",
+        "Low",
+        false,
+        0.0,
+        "T3",
+        2024,
+        12,
+        8,
+        6
+      ]
+    ]
+  }
+}

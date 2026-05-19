@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.uv/
+.ipynb_checkpoints/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Data
+data/raw/
+data/interim/
+data/processed/
+data/local/
+!data/samples/
+
+# AML / MLflow local artifacts
+mlruns/
+outputs/
+azureml-logs/
+.azureml/
+
+# IDE
+.vscode/*
+!.vscode/settings.json.example
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MLflow / sklearn local artifacts
+mlflow.db
+mlruns/
+outputs/
+
+DoNotTrack/
+

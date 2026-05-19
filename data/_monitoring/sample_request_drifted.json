@@ -1,0 +1,1 @@
+{"input_data": {"columns": ["countryOrRegion", "holidayName", "normalizeHolidayName", "date_year", "date_month", "date_day", "date_dayofweek"], "index": [0, 1, 2], "data": [["Atlantis", "New Year's Day", "New Year's Day", 2099, 1, 1, 0], ["Atlantis", "New Year's Day", "New Year's Day", 2099, 1, 1, 1], ["Atlantis", "New Year's Day", "New Year's Day", 2099, 1, 1, 6]]}}

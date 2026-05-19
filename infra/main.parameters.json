@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "namePrefix": { "value": "contoso" },
+    "location": { "value": "eastus2" },
+    "developerPrincipalId": { "value": "3f1c2b34-07f7-4865-8dca-b4d9bc583fc8" },
+    "computeInstanceOwnerUpn": { "value": "admin@<your-tenant>.onmicrosoft.com" },
+    "trainingVmSize": { "value": "Standard_DS3_v2" },
+    "trainingMaxNodes": { "value": 4 },
+    "computeInstanceVmSize": { "value": "Standard_DS3_v2" },    
+    "containerAppName": { "value": "mcp-server" },
+    "containerAppImage": { "value": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest" },
+    "containerAppTargetPort": { "value": 9000 },
+    "containerAppCpu": { "value": 1 },
+    "containerAppMemory": { "value": "2Gi" },
+    "containerAppMinReplicas": { "value": 1 },
+    "containerAppMaxReplicas": { "value": 2 }
+  }
+}

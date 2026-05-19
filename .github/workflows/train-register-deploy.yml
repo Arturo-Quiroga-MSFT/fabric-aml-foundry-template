@@ -1,0 +1,71 @@
+name: train-register-deploy
+
+# Owner: <author> B. — flesh out as the model + endpoint stabilize.
+# This is a starter scaffold: it shows the shape of the pipeline but the real
+# job invocations (az ml job create / az ml online-deployment update) need to
+# be wired up once the data asset name, model name, and endpoint name are final.
+
+on:
+  workflow_dispatch:
+    inputs:
+      data_asset:
+        description: 'AML data asset URI (azureml:<name>:<version>)'
+        required: true
+        default: 'azureml:contoso-poc-dataset:1'
+      target_column:
+        description: 'Target column name'
+        required: true
+        default: 'label'
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'pipelines/**'
+      - '.github/workflows/train-register-deploy.yml'
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AZURE_RESOURCE_GROUP: <resource-group>
+  AML_WORKSPACE: ${{ vars.AML_WORKSPACE }}
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Install az ml extension
+        run: az extension add -n ml -y
+
+      - name: Submit training job
+        run: |
+          echo "TODO: az ml job create -f pipelines/train.yml \\"
+          echo "        --set inputs.data=${{ github.event.inputs.data_asset || 'azureml:contoso-poc-dataset:1' }} \\"
+          echo "        --set inputs.target=${{ github.event.inputs.target_column || 'label' }} \\"
+          echo "        -g $AZURE_RESOURCE_GROUP -w $AML_WORKSPACE --stream"
+
+  deploy:
+    needs: train
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy latest model to endpoint
+        run: |
+          echo "TODO: az ml online-deployment update -f pipelines/deployment.yml \\"
+          echo "        -g $AZURE_RESOURCE_GROUP -w $AML_WORKSPACE"
